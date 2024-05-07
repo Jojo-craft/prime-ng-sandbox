@@ -1,1 +1,93 @@
-/* You can add global styles to this file, and also import other style files */
+//@import 'assets/mytheme/theme';
+
+//@import "primeng/resources/themes/lara-light-indigo/theme.css";
+//@import "primeng/resources/themes/lara-light-blue/theme.css";
+//@import "primeng/resources/themes/mira/theme.css";
+//@import "primeng/resources/themes/nova/theme.css";
+//@import "primeng/resources/themes/md-light-deeppurple/theme.css";
+//@import "primeng/resources/themes/aura-light-purple/theme.css";
+@import "primeng/resources/themes/aura-light-indigo/theme.css";
+
+@import "primeng/resources/primeng.css";
+
+
+:root {
+  --color-primary-50: #9AC0D7;
+  --color-primary-100: #9AC0D7;
+  --color-primary-200: #9AC0D7;
+  --color-primary-300: #9AC0D7;
+  --color-primary-400: #548BBD;
+  --color-primary-500: var(--primary-500);
+  --color-primary-600: #1B5F89;
+  --color-primary-700: #184D6D;
+  --color-primary-800: #184D6D;
+  --color-primary-900: #184D6D;
+
+  --color-secondary-50: #cdfffc;
+  --color-secondary-100: #a1fffd;
+  --color-secondary-200: #60fffe;
+  --color-secondary-300: #18f4f8;
+  --color-secondary-400: #00d7de;
+  --color-secondary-500: #00B2C1;
+  --color-secondary-600: #088896;
+  --color-secondary-700: #106c7a;
+  --color-secondary-800: #125a67;
+  --color-secondary-900: #053c47;
+
+  --color-success-50: #f0fdf5;
+  --color-success-100: #dcfcea;
+  --color-success-200: #bbf7d6;
+  --color-success-300: #86efb6;
+  --color-success-400: #4ade8e;
+  --color-success-500: #21c06b;
+  --color-success-600: #16a358;
+  --color-success-700: #158047;
+  --color-success-800: #16653c;
+  --color-success-900: #145333;
+
+  --color-danger-50: #fef2f2;
+  --color-danger-100: #fee2e2;
+  --color-danger-200: #fdcbcb;
+  --color-danger-300: #fba6a6;
+  --color-danger-400: #f67373;
+  --color-danger-500: #ee5353;
+  --color-danger-600: #da2828;
+  --color-danger-700: #b71e1e;
+  --color-danger-800: #971d1d;
+  --color-danger-900: #7e1e1e;
+
+  --color-info-50: #f0f9fe;
+  --color-info-100: #ddf0fc;
+  --color-info-200: #c3e5fa;
+  --color-info-300: #99d6f7;
+  --color-info-400: #69bff1;
+  --color-info-500: #46a3eb;
+  --color-info-600: #3087df;
+  --color-info-700: #2871cd;
+  --color-info-800: #275ca6;
+  --color-info-900: #244f84;
+
+  --color-warning-50: #fff9eb;
+  --color-warning-100: #ffefc6;
+  --color-warning-200: #fede89;
+  --color-warning-300: #feca57;
+  --color-warning-400: #fdaf22;
+  --color-warning-500: #f88c08;
+  --color-warning-600: #db6604;
+  --color-warning-700: #b64607;
+  --color-warning-800: #93360d;
+  --color-warning-900: #792d0e;
+
+  --color-contrast-50: #FFFFFF;
+  --color-contrast-100: #FFFFFF;
+  --color-contrast-200: #FAFAFA;
+  --color-contrast-300: #F0F0F0;
+  --color-contrast-400: #E5E5E5;
+  --color-contrast-500: #CCCCCC;
+  --color-contrast-600: #999999;
+  --color-contrast-700: #757575;
+  --color-contrast-800: #363C3D;
+  --color-contrast-900: #000000;
+}
+
+

@@ -1,0 +1,21 @@
+.test-card {
+  height: 50px;
+  width: 100%;
+  background-color: var(--color-primary-500);
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.input {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 5px;
+}
