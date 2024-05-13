@@ -49,6 +49,11 @@
       </small>
     </div>
 
+    <p-floatLabel class="input">
+      <input pInputText id="test2" [formControlName]="'test2'" />
+      <label for="test2">Test</label>
+    </p-floatLabel>
+
     <div class="input">
       <p-checkbox
         [formControlName]="'isEnabled'"
@@ -106,18 +111,28 @@
 
 
 <p-card header="Table">
-  <p-table [value]="products" [tableStyle]="{'min-width': '50rem'}">
+  <p-table
+    [value]="products"
+    [tableStyle]="{'min-width': '50rem'}"
+    [(selection)]="selectedProducts">
     <ng-template pTemplate="header" let-columns>
       <tr>
+        <th style="width: 4rem"><p-tableHeaderCheckbox /></th>
+        <th>Code </th>
         <th>Name </th>
         <th>Category</th>
         <th>Quantity</th>
         <th>Status</th>
-        <th>Reviews</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-product let-columns="columns">
       <tr>
+        <td>
+          <p-tableCheckbox [value]="product" />
+        </td>
+        <td>
+          {{product.code}}
+        </td>
         <td>
           {{product.name}}
         </td>
@@ -129,9 +144,6 @@
         </td>
         <td>
           <p-tag [value]="product.inventoryStatus" [severity]="getSeverity(product.inventoryStatus)" />
-        </td>
-        <td>
-          <p-rating [(ngModel)]="product.rating" [readonly]="true" [cancel]="false" />
         </td>
       </tr>
     </ng-template>

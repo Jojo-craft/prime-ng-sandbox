@@ -13,10 +13,11 @@ import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {RippleModule} from "primeng/ripple";
 import {MessagesModule} from "primeng/messages";
 import {CardModule} from "primeng/card";
-import {TableModule} from "primeng/table";
+import {TableModule, TableRowSelectEvent, TableRowUnSelectEvent} from "primeng/table";
 import {TagModule} from "primeng/tag";
 import {RatingModule} from "primeng/rating";
 import {CommonModule} from "@angular/common";
+import {FloatLabelModule} from "primeng/floatlabel";
 
 export class SelectItem {
   constructor(
@@ -44,12 +45,14 @@ interface City {
     MessagesModule, RippleModule,
     CardModule,
     TableModule,
-    TagModule, RatingModule, CommonModule, FormsModule],
+    TagModule, RatingModule, CommonModule, FormsModule, FloatLabelModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   providers: [ConfirmationService, MessageService]
 })
 export class AppComponent {
+
+  selectedProducts!: Product;
 
   cities: City[] = [
     {name: 'New York', code: 'NY'},
@@ -64,6 +67,7 @@ export class AppComponent {
     code: new FormControl<string>('', [Validators.required, Validators.maxLength(30)]),
     name: new FormControl<string>('', [Validators.required, Validators.maxLength(60)]),
     test: new FormControl<string>(''),
+    test2: new FormControl<string>(''),
     isEnabled: new FormControl<string | null>(null),
     type: new FormControl<SelectItem | null>(null),
     date: new FormControl<Date>(new Date()),
@@ -116,9 +120,8 @@ export class AppComponent {
       code: 'test',
       name: 'test',
       category: 'test',
-      quantity: 2,
+      quantity: 1,
       inventoryStatus: 'OUTOFSTOCK',
-      rating:'2'
     },
     {
       code: 'test',
@@ -126,23 +129,20 @@ export class AppComponent {
       category: 'test',
       quantity: 2,
       inventoryStatus: 'LOWSTOCK',
-      rating:'2'
     },
     {
       code: 'test',
       name: 'test',
       category: 'test',
-      quantity: 2,
+      quantity: 3,
       inventoryStatus: 'INSTOCK',
-      rating:'2'
     },
     {
       code: 'test',
       name: 'test',
       category: 'test',
-      quantity: 2,
+      quantity: 4,
       inventoryStatus: 'LOWSTOCK',
-      rating:'2'
     }
   ];
 
@@ -151,8 +151,7 @@ export class AppComponent {
     { field: 'name', header: 'Name' },
     { field: 'category', header: 'Category' },
     { field: 'quantity', header: 'Quantity' },
-    { field: 'inventoryStatus', header: 'Status' },
-    { field: 'rating', header: 'Rating' }
+    { field: 'inventoryStatus', header: 'Status' }
   ];
 
   getSeverity(status: string) {
@@ -167,7 +166,6 @@ export class AppComponent {
 
     return 'success';
   }
-
 }
 
 
@@ -177,5 +175,4 @@ interface Product {
   category: string;
   quantity: number;
   inventoryStatus: string;
-  rating: string;
 }
