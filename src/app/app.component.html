@@ -3,97 +3,149 @@
 <p-card header="Simple Card">
   <form [formGroup]="form" class="main">
 
-    <div class="input">
-      @if (form.get('code')?.touched && form.get('code')?.invalid) {
-        <label for="code" style="color: var(--color-danger-500);">Code</label>
-      } @else {
-        <label for="code">Code</label>
-      }
-      <input
-        pInputText
-        id="code"
-        [formControlName]="'code'" />
-      @if (form.get('code')?.touched && form.get('code')?.invalid) {
-        <small id="code-help" style="color: var(--color-danger-500);">
-          Taille max. 30.
+    <div class="row">
+
+      <div class="input">
+        @if (form.get('code')?.touched && form.get('code')?.invalid) {
+          <label for="code" style="color: var(--p-red-500);">Code</label>
+        } @else {
+          <label for="code">Code</label>
+        }
+        <input
+          pInputText
+          id="code"
+          [formControlName]="'code'"/>
+        @if (form.get('code')?.touched && form.get('code')?.invalid) {
+          <small id="code-help" style="color: var(--p-red-500);">
+            Taille max. 30.
+          </small>
+        }
+      </div>
+
+      <div class="input">
+        @if (form.get('name')?.touched && form.get('name')?.invalid) {
+          <label for="name" style="color: var(--p-red-500);">Nom</label>
+        } @else {
+          <label for="name">Nom</label>
+        }
+        <input
+          pInputText
+          id="name"
+          [formControlName]="'name'"
+          variant="filled"/>
+        @if (form.get('name')?.touched && form.get('name')?.invalid) {
+          <small id="name-help" style="color: var(--p-red-500);">
+            Taille max. 60.
+          </small>
+        }
+      </div>
+
+      <div class="input">
+        <label for="test">Test</label>
+        <input
+          pInputText
+          id="test"
+          [formControlName]="'test'"/>
+        <small id="test-help">
+          Afficher une aide
         </small>
-      }
+      </div>
+
     </div>
 
-    <div class="input">
-      @if (form.get('name')?.touched && form.get('name')?.invalid) {
-        <label for="name" style="color: var(--color-danger-500);">Nom</label>
-      } @else {
-        <label for="name">Nom</label>
-      }
-      <input
-        pInputText
-        id="name"
-        [formControlName]="'name'"
-        variant="filled" />
-      @if (form.get('name')?.touched && form.get('name')?.invalid) {
-        <small id="name-help" style="color: var(--color-danger-500);">
-          Taille max. 60.
-        </small>
-      }
+    <div class="row">
+      <label for="select"> Checkbox </label>
+      <div class="input">
+        <p-checkbox
+          [formControlName]="'isEnabled'"
+          value="test"/>
+      </div>
     </div>
 
-    <div class="input">
-      <label for="test">Test</label>
-      <input
-        pInputText
-        id="test"
-        [formControlName]="'test'" />
-      <small id="test-help">
-        Afficher une aide
-      </small>
+
+    <div class="row">
+
+      <div class="input">
+        <label for="select"> Select </label>
+        <p-dropdown
+          id="select"
+          [formControlName]="'type'"
+          [options]="types"
+          optionLabel="label"
+          variant="filled"
+          placeholder="Selectionner un truc"/>
+      </div>
+
+      <div class="input">
+        <label for="buttondisplay"> Create date </label>
+        <p-calendar
+          id="buttondisplay"
+          [formControlName]="'date'"
+          [showIcon]="true"
+          [iconDisplay]="'input'"/>
+      </div>
+
+      <div class="input">
+        <label for="multiSelect"> Multi Select </label>
+        <p-multiSelect
+          id="multiSelect"
+          [options]="cities"
+          [formControlName]="'city'"
+          optionLabel="name"
+          placeholder="Selectionner des villes"
+          showClear="true"/>
+      </div>
+
     </div>
 
-    <p-floatLabel class="input">
-      <input pInputText id="test2" [formControlName]="'test2'" />
-      <label for="test2">Test</label>
-    </p-floatLabel>
 
-    <div class="input">
-<!--      <p-checkbox-->
-<!--        [formControlName]="'isEnabled'"-->
-<!--        [label]="'Activé'"-->
-<!--        value="test" />-->
+    <p-toast/>
+    <p-confirmDialog/>
 
-      <p-checkbox
-        [formControlName]="'isEnabled'"
-        value="test" />
-    </div>
-
-    <p-dropdown
-      [formControlName]="'type'"
-      [options]="types"
-      optionLabel="label"
-      variant="filled"
-      placeholder="Selectionner un truc" />
-
-    <div class="input">
-      <label for="buttondisplay"> Create date </label>
-      <p-calendar
-        id="buttondisplay"
-        [formControlName]="'date'"
-        [showIcon]="true"
-        [iconDisplay]="'input'" />
-    </div>
-
-  <p-multiSelect
-    [options]="cities"
-    [formControlName]="'city'"
-    optionLabel="name"
-    placeholder="Selectionner des villes"
-    showClear="true"/>
-
-    <p-toast />
-    <p-confirmDialog />
     <p-button
       (click)="confirm($event)"
       label="Save">
     </p-button>
+
+    <div class="row">
+      <p-button
+        type="button"
+        pRipple
+        (click)="showSuccess()"
+        label="Success"
+        severity="success"/>
+      <p-button
+        type="button"
+        pRipple
+        (click)="showInfo()"
+        label="Info"
+        severity="info"/>
+      <p-button
+        type="button"
+        pRipple
+        (click)="showWarn()"
+        label="Warn"
+        severity="warn"/>
+      <p-button
+        type="button"
+        pRipple
+        (click)="showError()"
+        label="Error"
+        severity="danger"/>
+      <p-button
+        type="button"
+        pRipple
+        (click)="showSecondary()"
+        label="Secondary"
+        severity="secondary"/>
+      <p-button
+        type="button"
+        pRipple
+        (click)="showContrast()"
+        label="Contrast"
+        severity="contrast"/>
+    </div>
+
   </form>
 </p-card>
 
@@ -109,9 +161,11 @@
     pRipple
     (click)="clearMessages()"
     label="Clear"
-    severity="secondary" />
+    severity="secondary"/>
 
   @for (message of messages(); track message; let first = $first) {
+    <br>
+    <br>
     <p-message [severity]="message.severity" [text]="message.content" [ngClass]="{ 'mt-4': !first }"></p-message>
   }
 
@@ -125,9 +179,11 @@
     [(selection)]="selectedProducts">
     <ng-template pTemplate="header" let-columns>
       <tr>
-        <th style="width: 4rem"><p-tableHeaderCheckbox /></th>
-        <th>Code </th>
-        <th>Name </th>
+        <th style="width: 4rem">
+          <p-tableHeaderCheckbox/>
+        </th>
+        <th>Code</th>
+        <th>Name</th>
         <th>Category</th>
         <th>Quantity</th>
         <th>Status</th>
@@ -136,22 +192,22 @@
     <ng-template pTemplate="body" let-product let-columns="columns">
       <tr>
         <td>
-          <p-tableCheckbox [value]="product" />
+          <p-tableCheckbox [value]="product"/>
         </td>
         <td>
-          {{product.code}}
+          {{ product.code }}
         </td>
         <td>
-          {{product.name}}
+          {{ product.name }}
         </td>
         <td>
-          {{product.category}}
+          {{ product.category }}
         </td>
         <td>
-          {{product.quantity}}
+          {{ product.quantity }}
         </td>
         <td>
-          <p-tag [value]="product.inventoryStatus" [severity]="getSeverity(product.inventoryStatus)" />
+          <p-tag [value]="product.inventoryStatus" [severity]="getSeverity(product.inventoryStatus)"/>
         </td>
       </tr>
     </ng-template>
@@ -159,4 +215,4 @@
 </p-card>
 
 
-<router-outlet />
+<router-outlet/>

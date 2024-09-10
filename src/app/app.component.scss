@@ -12,6 +12,13 @@
   gap: 30px;
 }
 
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 30px;
+}
+
 .input {
   display: flex;
   flex-direction: column;

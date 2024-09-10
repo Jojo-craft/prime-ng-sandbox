@@ -6,43 +6,19 @@ import {CheckboxModule} from "primeng/checkbox";
 import {DropdownModule} from "primeng/dropdown";
 import {InputTextModule} from "primeng/inputtext";
 import {MultiSelectModule} from "primeng/multiselect";
-import {ConfirmationService, MessageService} from "primeng/api";
+import {ConfirmationService, MessageService, PrimeNGConfig} from "primeng/api";
 import {MessageModule} from 'primeng/message';
 import {ButtonModule} from "primeng/button";
 import {ToastModule} from "primeng/toast";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {RippleModule} from "primeng/ripple";
 import {CardModule} from "primeng/card";
-import {TableModule, TableRowSelectEvent, TableRowUnSelectEvent} from "primeng/table";
+import {TableModule} from "primeng/table";
 import {TagModule} from "primeng/tag";
 import {RatingModule} from "primeng/rating";
 import {CommonModule} from "@angular/common";
 import {FloatLabelModule} from "primeng/floatlabel";
-import {PrimeNGConfig} from 'primeng/api';
-import {Aura} from 'primeng/themes/aura';
-import {Lara} from "primeng/themes/lara";
-import {Nora} from "primeng/themes/nora";
-import {definePreset} from "primeng/themes";
-
-
-const MyPreset = definePreset(
-  Aura, {
-    semantic: {
-      primary: {
-        50: '#9AC0D7',
-        100: '#9AC0D7',
-        200: '#9AC0D7',
-        300: '#9AC0D7',
-        400: '#548BBD',
-        500: '#5e94c6',
-        600: '#1B5F89',
-        700: '#184D6D',
-        800: '#184D6D',
-        900: '#184D6D',
-        950: '#022032'
-      }
-    }
-  });
+import {MyPreset} from "./my-preset";
 
 export class SelectItem {
   constructor(
@@ -87,6 +63,30 @@ export class AppComponent {
     this.primengConfig.theme.set({preset: MyPreset});
     //this.primengConfig.theme.set({preset: Aura});
     //this.primengConfig.ripple.set(true);
+  }
+
+  showSuccess() {
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Message Content' });
+  }
+
+  showInfo() {
+    this.messageService.add({ severity: 'info', summary: 'Info', detail: 'Message Content' });
+  }
+
+  showWarn() {
+    this.messageService.add({ severity: 'warn', summary: 'Warn', detail: 'Message Content' });
+  }
+
+  showError() {
+    this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Message Content' });
+  }
+
+  showContrast() {
+    this.messageService.add({ severity: 'contrast', summary: 'Error', detail: 'Message Content' });
+  }
+
+  showSecondary() {
+    this.messageService.add({ severity: 'secondary', summary: 'Secondary', detail: 'Message Content' });
   }
 
   selectedProducts!: Product;
