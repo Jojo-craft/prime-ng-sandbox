@@ -1,29 +1,55 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import {Component, signal} from '@angular/core';
+import {RouterOutlet} from '@angular/router';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {CalendarModule} from "primeng/calendar";
 import {CheckboxModule} from "primeng/checkbox";
 import {DropdownModule} from "primeng/dropdown";
 import {InputTextModule} from "primeng/inputtext";
 import {MultiSelectModule} from "primeng/multiselect";
-import {ConfirmationService, Message, MessageService} from "primeng/api";
+import {ConfirmationService, MessageService} from "primeng/api";
+import {MessageModule} from 'primeng/message';
 import {ButtonModule} from "primeng/button";
 import {ToastModule} from "primeng/toast";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {RippleModule} from "primeng/ripple";
-import {MessagesModule} from "primeng/messages";
 import {CardModule} from "primeng/card";
 import {TableModule, TableRowSelectEvent, TableRowUnSelectEvent} from "primeng/table";
 import {TagModule} from "primeng/tag";
 import {RatingModule} from "primeng/rating";
 import {CommonModule} from "@angular/common";
 import {FloatLabelModule} from "primeng/floatlabel";
+import {PrimeNGConfig} from 'primeng/api';
+import {Aura} from 'primeng/themes/aura';
+import {Lara} from "primeng/themes/lara";
+import {Nora} from "primeng/themes/nora";
+import {definePreset} from "primeng/themes";
+
+
+const MyPreset = definePreset(
+  Aura, {
+    semantic: {
+      primary: {
+        50: '#9AC0D7',
+        100: '#9AC0D7',
+        200: '#9AC0D7',
+        300: '#9AC0D7',
+        400: '#548BBD',
+        500: '#5e94c6',
+        600: '#1B5F89',
+        700: '#184D6D',
+        800: '#184D6D',
+        900: '#184D6D',
+        950: '#022032'
+      }
+    }
+  });
 
 export class SelectItem {
   constructor(
     public value: string,
     public label: string,
-  ) {}
+  ) {
+  }
 
   static of(value: string, label: string): SelectItem {
     return new SelectItem(value, label);
@@ -35,22 +61,33 @@ interface City {
   code: string
 }
 
-
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, ReactiveFormsModule, CalendarModule,
     CheckboxModule, DropdownModule, InputTextModule, MultiSelectModule,
     ConfirmDialogModule, ToastModule, ButtonModule,
-    MessagesModule, RippleModule,
+    RippleModule,
     CardModule,
     TableModule,
-    TagModule, RatingModule, CommonModule, FormsModule, FloatLabelModule],
+    TagModule, RatingModule, CommonModule, FormsModule, FloatLabelModule,
+    MessageModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   providers: [ConfirmationService, MessageService]
 })
 export class AppComponent {
+
+  constructor(
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService,
+    private primengConfig: PrimeNGConfig) {
+
+    // Aura, Lara or Nora
+    this.primengConfig.theme.set({preset: MyPreset});
+    //this.primengConfig.theme.set({preset: Aura});
+    //this.primengConfig.ripple.set(true);
+  }
 
   selectedProducts!: Product;
 
@@ -76,42 +113,38 @@ export class AppComponent {
 
   types: SelectItem[] = [SelectItem.of('1', 'Multi Billing entity'), SelectItem.of('2', 'Mono Billing entity')];
 
-
-  constructor(private confirmationService: ConfirmationService, private messageService: MessageService) {
-  }
-
   confirm(event: Event): void {
     this.confirmationService.confirm({
       target: event.target as EventTarget,
       message: 'Are you sure that you want to proceed?',
       header: 'Confirmation',
       icon: 'pi pi-exclamation-triangle',
-      acceptIcon:"none",
-      rejectIcon:"none",
-      rejectButtonStyleClass:"p-button-text",
+      acceptIcon: "none",
+      rejectIcon: "none",
+      rejectButtonStyleClass: "p-button-text",
       accept: () => {
-        this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted' });
+        this.messageService.add({severity: 'info', summary: 'Confirmed', detail: 'You have accepted'});
       },
       reject: () => {
-        this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected', life: 3000 });
+        this.messageService.add({severity: 'error', summary: 'Rejected', detail: 'You have rejected', life: 3000});
       }
     });
   }
 
 
-  messages: Message[] = [];
+  messages = signal<any[]>([]);
 
   addMessages() {
-    this.messages = [
-      { severity: 'info', summary: 'Dynamic Info Message' },
-      { severity: 'success', summary: 'Dynamic Success Message' },
-      { severity: 'warn', summary: 'Dynamic Warning Message' },
-      { severity: 'error', summary: 'Dynamic Error Message' }
-    ];
+    this.messages.set([
+      {severity: 'info', content: 'Dynamic Info Message'},
+      {severity: 'success', content: 'Dynamic Success Message'},
+      {severity: 'warn', content: 'Dynamic Warning Message'},
+      {severity: 'error', content: 'Dynamic Error Message'}
+    ]);
   }
 
   clearMessages() {
-    this.messages = [];
+    this.messages.set([]);
   }
 
 
@@ -147,11 +180,11 @@ export class AppComponent {
   ];
 
   cols = [
-    { field: 'code', header: 'Code' },
-    { field: 'name', header: 'Name' },
-    { field: 'category', header: 'Category' },
-    { field: 'quantity', header: 'Quantity' },
-    { field: 'inventoryStatus', header: 'Status' }
+    {field: 'code', header: 'Code'},
+    {field: 'name', header: 'Name'},
+    {field: 'category', header: 'Category'},
+    {field: 'quantity', header: 'Quantity'},
+    {field: 'inventoryStatus', header: 'Status'}
   ];
 
   getSeverity(status: string) {
@@ -159,7 +192,7 @@ export class AppComponent {
       case 'INSTOCK':
         return 'success';
       case 'LOWSTOCK':
-        return 'warning';
+        return 'warn';
       case 'OUTOFSTOCK':
         return 'danger';
     }

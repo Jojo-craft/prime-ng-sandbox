@@ -55,9 +55,13 @@
     </p-floatLabel>
 
     <div class="input">
+<!--      <p-checkbox-->
+<!--        [formControlName]="'isEnabled'"-->
+<!--        [label]="'Activé'"-->
+<!--        value="test" />-->
+
       <p-checkbox
         [formControlName]="'isEnabled'"
-        [label]="'Activé'"
         value="test" />
     </div>
 
@@ -106,7 +110,11 @@
     (click)="clearMessages()"
     label="Clear"
     severity="secondary" />
-  <p-messages [(value)]="messages" [enableService]="false" />
+
+  @for (message of messages(); track message; let first = $first) {
+    <p-message [severity]="message.severity" [text]="message.content" [ngClass]="{ 'mt-4': !first }"></p-message>
+  }
+
 </p-card>
 
 
