@@ -1,6 +1,20 @@
 <div class="test-card"></div>
 
 <p-card header="Simple Card">
+
+  <div class="input">
+    <label for="theme">Choix Theme :</label>
+    <p-dropdown
+      id="theme"
+      [options]="themes"
+      [(ngModel)]="selectedTheme"
+      optionLabel="label"
+      variant="filled"
+      placeholder="Selectionner un theme"
+      (onClick)="onChangeTheme()"
+    />
+  </div>
+
   <form [formGroup]="form" class="main">
 
     <div class="row">
@@ -104,9 +118,11 @@
 
     <p-button
       (click)="confirm($event)"
-      label="Save">
+      label="Open dialog">
     </p-button>
 
+
+    <h2>Afficher Toasts :</h2>
     <div class="row">
       <p-button
         type="button"

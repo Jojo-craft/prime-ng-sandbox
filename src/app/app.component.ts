@@ -18,7 +18,9 @@ import {TagModule} from "primeng/tag";
 import {RatingModule} from "primeng/rating";
 import {CommonModule} from "@angular/common";
 import {FloatLabelModule} from "primeng/floatlabel";
-import {MyPreset} from "./my-preset";
+import {AuraPreset, LaraPreset, NoraPreset} from "./my-preset";
+import {SelectButtonModule} from "primeng/selectbutton";
+import {RadioButtonModule} from "primeng/radiobutton";
 
 export class SelectItem {
   constructor(
@@ -47,6 +49,8 @@ interface City {
     CardModule,
     TableModule,
     TagModule, RatingModule, CommonModule, FormsModule, FloatLabelModule,
+    SelectButtonModule,
+    RadioButtonModule,
     MessageModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
@@ -54,13 +58,16 @@ interface City {
 })
 export class AppComponent {
 
+  themes: SelectItem[] = [SelectItem.of('1', 'Aura'), SelectItem.of('2', 'Lara'), SelectItem.of('2', 'Nora')];
+  selectedTheme: SelectItem | undefined;
+
   constructor(
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
     private primengConfig: PrimeNGConfig) {
 
     // Aura, Lara or Nora
-    this.primengConfig.theme.set({preset: MyPreset});
+    this.primengConfig.theme.set({preset: AuraPreset});
     //this.primengConfig.theme.set({preset: Aura});
     //this.primengConfig.ripple.set(true);
   }
@@ -198,6 +205,16 @@ export class AppComponent {
     }
 
     return 'success';
+  }
+
+  onChangeTheme(): void {
+    if (this.selectedTheme?.label == 'Aura') {
+      this.primengConfig.theme.set({preset: AuraPreset});
+    } else if (this.selectedTheme?.label == 'Lara') {
+      this.primengConfig.theme.set({preset: LaraPreset});
+    } else if (this.selectedTheme?.label == 'Nora') {
+      this.primengConfig.theme.set({preset: NoraPreset});
+    }
   }
 }
 
