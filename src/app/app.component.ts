@@ -21,6 +21,8 @@ import {FloatLabelModule} from "primeng/floatlabel";
 import {AuraPreset, LaraPreset, NoraPreset} from "./my-preset";
 import {SelectButtonModule} from "primeng/selectbutton";
 import {RadioButtonModule} from "primeng/radiobutton";
+import {SliderModule} from "primeng/slider";
+import {ToggleSwitchModule} from "primeng/toggleswitch";
 
 export class SelectItem {
   constructor(
@@ -51,7 +53,10 @@ interface City {
     TagModule, RatingModule, CommonModule, FormsModule, FloatLabelModule,
     SelectButtonModule,
     RadioButtonModule,
-    MessageModule],
+    SliderModule,
+    MessageModule,
+    ToggleSwitchModule
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   providers: [ConfirmationService, MessageService]
@@ -73,27 +78,27 @@ export class AppComponent {
   }
 
   showSuccess() {
-    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Message Content' });
+    this.messageService.add({severity: 'success', summary: 'Success', detail: 'Message Content'});
   }
 
   showInfo() {
-    this.messageService.add({ severity: 'info', summary: 'Info', detail: 'Message Content' });
+    this.messageService.add({severity: 'info', summary: 'Info', detail: 'Message Content'});
   }
 
   showWarn() {
-    this.messageService.add({ severity: 'warn', summary: 'Warn', detail: 'Message Content' });
+    this.messageService.add({severity: 'warn', summary: 'Warn', detail: 'Message Content'});
   }
 
   showError() {
-    this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Message Content' });
+    this.messageService.add({severity: 'error', summary: 'Error', detail: 'Message Content'});
   }
 
   showContrast() {
-    this.messageService.add({ severity: 'contrast', summary: 'Error', detail: 'Message Content' });
+    this.messageService.add({severity: 'contrast', summary: 'Error', detail: 'Message Content'});
   }
 
   showSecondary() {
-    this.messageService.add({ severity: 'secondary', summary: 'Secondary', detail: 'Message Content' });
+    this.messageService.add({severity: 'secondary', summary: 'Secondary', detail: 'Message Content'});
   }
 
   selectedProducts!: Product;
@@ -110,12 +115,13 @@ export class AppComponent {
     id: new FormControl<string>(''),
     code: new FormControl<string>('', [Validators.required, Validators.maxLength(30)]),
     name: new FormControl<string>('', [Validators.required, Validators.maxLength(60)]),
-    test: new FormControl<string>(''),
+    age: new FormControl<number>(18),
     test2: new FormControl<string>(''),
     isEnabled: new FormControl<string | null>(null),
     type: new FormControl<SelectItem | null>(null),
     date: new FormControl<Date>(new Date()),
     city: new FormControl<City | null>(null),
+    checked: new FormControl(true),
   });
 
   types: SelectItem[] = [SelectItem.of('1', 'Multi Billing entity'), SelectItem.of('2', 'Mono Billing entity')];

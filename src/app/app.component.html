@@ -3,7 +3,7 @@
 <p-card header="Simple Card">
 
   <div class="input">
-    <label for="theme">Choix Theme :</label>
+    <label for="theme">Choix Theme</label>
     <p-dropdown
       id="theme"
       [options]="themes"
@@ -55,11 +55,14 @@
       </div>
 
       <div class="input">
-        <label for="test">Test</label>
+        <label for="age">Age</label>
         <input
           pInputText
-          id="test"
-          [formControlName]="'test'"/>
+          type="number"
+          id="age"
+          min="0"
+          max="130"
+          [formControlName]="'age'"/>
         <small id="test-help">
           Afficher une aide
         </small>
@@ -68,6 +71,12 @@
     </div>
 
     <div class="row">
+
+      <label for="switch">Toggle Switch</label>
+      <div class="input">
+        <p-toggleswitch id="switch" formControlName="checked" />
+      </div>
+
       <label for="select"> Checkbox </label>
       <div class="input">
         <p-checkbox
